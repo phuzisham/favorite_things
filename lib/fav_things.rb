@@ -13,8 +13,32 @@ class Item
     @@list
   end
 
+  def validate?()
+    @@list.all? do |item|
+      if (item.name != self.name) && (item.rank != self.rank)
+        true
+      end
+    end
+  end
+
   def save()
     @@list.push(self)
+  end
+
+  def update?()
+    @@list.all? do |item|
+      if (item.name == self.name) && (item.rank != self.rank)
+        true
+      end
+    end
+  end
+
+  def update()
+    @@list.each do |item|
+      if (item.name == self.name)
+        item.rank = self.rank
+      end
+    end
   end
 
   def self.clear()
@@ -31,7 +55,7 @@ class Item
   end
 
   def self.order()
-    @@list.sort_by! {|item| item.rank}
+    @@list.sort_by! {|item| item.rank.to_i}
   end
 
 end

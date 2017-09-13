@@ -59,9 +59,49 @@ describe("Item") do
       item.save()
       item2 = Item.new("pizza", 2)
       item2.save()
-      test_list1 = ['pizza', 'apples']
-      test_list2 = Item.order
-      expect(test_list2).to(eq(Item.all))
+      test_list = Item.order
+      expect(test_list).to(eq(Item.all))
     end
   end
+
+  describe("#save") do
+    it("sorts items by rank") do
+      item = Item.new("apples", 8)
+      item.save()
+      item2 = Item.new("pizza", 2)
+      item2.save()
+      test_list = Item.order
+      test_item = Item.new("apples", 8)
+      expect(test_item.save).to(eq(test_list))
+    end
+  end
+
+  describe('#validate?') do
+    it('will return false if you attempt to push duplicate item') do
+      item = Item.new("apples", 8)
+      item.save()
+      item2 = Item.new("apples", 2)
+      expect(item2.validate?).to(eq(false))
+    end
+  end
+
+  describe('#update?') do
+    it('will return false if you attempt to push duplicate item') do
+      item = Item.new("apples", 8)
+      item.save()
+      item2 = Item.new("apples", 2)
+      expect(item2.update?).to(eq(true))
+    end
+  end
+
+  describe('#update') do
+    it('will return false if you attempt to push duplicate item') do
+      item = Item.new("apples", 8)
+      item.save()
+      item2 = Item.new("apples", 2)
+      item.update()
+      expect(item.rank).to(eq(2))
+    end
+  end
+
 end
