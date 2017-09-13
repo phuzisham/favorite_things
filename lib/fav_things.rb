@@ -1,7 +1,7 @@
 class Item
   @@list = []
-  attr_reader :id, :rank
-  attr_accessor :name
+  attr_reader :id 
+  attr_accessor :name, :rank
 
   def initialize(name, rank)
     @name = name

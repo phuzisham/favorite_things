@@ -86,7 +86,7 @@ describe("Item") do
   end
 
   describe('#update?') do
-    it('will return false if you attempt to push duplicate item') do
+    it('will return true for update?') do
       item = Item.new("apples", 8)
       item.save()
       item2 = Item.new("apples", 2)
@@ -95,11 +95,11 @@ describe("Item") do
   end
 
   describe('#update') do
-    it('will return false if you attempt to push duplicate item') do
+    it('will change rank of item') do
       item = Item.new("apples", 8)
       item.save()
       item2 = Item.new("apples", 2)
-      item.update()
+      item2.update()
       expect(item.rank).to(eq(2))
     end
   end
